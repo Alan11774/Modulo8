@@ -3,9 +3,9 @@
     <solid android:color="#FFFFFF"/>
     <corners android:radius="10dp"/>
     <gradient
-        android:startColor="#DFFFC107"
-        android:endColor="#EE9005"
+        android:startColor="#82E9E8E6"
+        android:endColor="#2196F3"
         android:angle="270"/>
-    <stroke android:width="2dp" android:color="#FF9800"/>
+    <stroke android:width="2dp" android:color="#2196F3"/>
 
 </shape>

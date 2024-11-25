@@ -1,11 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1E1E1C"
     tools:context=".ui.fragments.LawyersListFragment">
 
+    <ImageView
+        android:id="@+id/background_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
     <ProgressBar
         android:id="@+id/pbLoading"
         android:layout_width="100dp"
@@ -17,8 +20,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLawyers"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent" />
 
 </FrameLayout>
