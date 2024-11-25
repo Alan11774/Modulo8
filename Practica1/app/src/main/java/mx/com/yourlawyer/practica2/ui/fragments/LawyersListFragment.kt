@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.Target
 import mx.com.yourlawyer.practica2.R
 import mx.com.yourlawyer.practica2.application.LawyersRfApp
 import mx.com.yourlawyer.practica2.data.LawyerRepository
@@ -42,6 +45,14 @@ class LawyersListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Load the background image using Glide
+        Glide.with(this)
+            .load(R.drawable.background)
+            .override(Target.SIZE_ORIGINAL)
+            .fitCenter()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(binding.backgroundList)
         // Music Player
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.oxxo)
         mediaPlayer.start()
