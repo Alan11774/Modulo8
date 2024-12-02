@@ -35,6 +35,6 @@ data class CoordinatesDto(
     var name: String? = null,
     @SerializedName("latitude")
     var latitude: String? = null,
-    @SerializedName("longitud")
-    var longitud: String? = null
+    @SerializedName("longitude")
+    var longitude: String? = null
 )

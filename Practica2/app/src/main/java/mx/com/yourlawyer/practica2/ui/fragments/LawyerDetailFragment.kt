@@ -100,8 +100,8 @@ class LawyerDetailFragment : Fragment() {
                             requireActivity().supportFragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, MapsFragment.newInstance(
                                     response.body()?.coordinates?.name.toString(),
-                                    response.body()?.coordinates?.latitude.toString().toDouble(),
-                                    response.body()?.coordinates?.longitud.toString().toDouble()))
+                                    response.body()?.coordinates?.latitude.toString(),
+                                    response.body()?.coordinates?.longitude.toString()))
                                 .addToBackStack(null)
                                 .commit()
 
