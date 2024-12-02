@@ -86,14 +86,14 @@ class LawyerDetailFragment : Fragment() {
                             response.body()?.examples?.joinToString(", ")
                         )
 //                        // Sección del video
-//                        youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener(){
-//                                override fun onReady(youTubePlayer: YouTubePlayer) {
-////                                    youTubePlayer.loadVideo("y-wJo11dzPc", 0f)
-//                                    youTubePlayer.loadVideo( response.body()?.video.toString()
-//                                        , 0f)
-//                                }
-//                            })
-//                        lifecycle.addObserver(youtubePlayerView)
+                        youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener(){
+                                override fun onReady(youTubePlayer: YouTubePlayer) {
+//                                    youTubePlayer.loadVideo("y-wJo11dzPc", 0f)
+                                    youTubePlayer.loadVideo( response.body()?.video.toString()
+                                        , 0f)
+                                }
+                            })
+                        lifecycle.addObserver(youtubePlayerView)
                         
                         
                         btnMaps.setOnClickListener{

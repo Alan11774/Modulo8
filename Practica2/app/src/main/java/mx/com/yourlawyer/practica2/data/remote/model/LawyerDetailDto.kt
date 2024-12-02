@@ -29,7 +29,10 @@ data class LawyerDetailDto (
 
 
 )
-
+// ***************************************************************
+// Model created as object ,
+// this because the api has a dictionary of strings
+// ***************************************************************
 data class CoordinatesDto(
     @SerializedName("name")
     var name: String? = null,

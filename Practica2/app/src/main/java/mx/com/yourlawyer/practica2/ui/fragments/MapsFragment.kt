@@ -154,7 +154,6 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback, Locat
         val marker = MarkerOptions()
             .position(coordinates)
             .title(name)
-            .snippet("Cursos Y Diplomados en TIC")
             .icon(BitmapDescriptorFactory.fromResource(R.drawable.school))
         map.addMarker(marker)
         map.animateCamera(
