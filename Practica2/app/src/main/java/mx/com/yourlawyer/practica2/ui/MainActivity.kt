@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import mx.com.yourlawyer.practica2.R
 import mx.com.yourlawyer.practica2.databinding.ActivityMainBinding
 import mx.com.yourlawyer.practica2.ui.fragments.LawyersListFragment
+import mx.com.yourlawyer.practica2.ui.fragments.MapsFragment
 import mx.com.yourlawyer.practica2.ui.fragments.SignInFragment
 
 class MainActivity : AppCompatActivity() {
@@ -18,8 +19,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-//                .replace(R.id.fragment_container, LawyersListFragment())
-                .replace(R.id.fragment_container, SignInFragment())
+                .replace(R.id.fragment_container, LawyersListFragment())
+//                .replace(R.id.fragment_container, MapsFragment())
                 .commit()
         }
     }

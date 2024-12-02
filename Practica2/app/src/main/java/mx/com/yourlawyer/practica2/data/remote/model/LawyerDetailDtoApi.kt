@@ -10,6 +10,6 @@ data class LawyerDetailDtoApi (
     var examples: MutableList<String>? = null,
     var image: String? = null,
     var activeLawyers: Int? = null,
-    var video: String? = null
+    var video: String? = null,
 
 )

@@ -61,7 +61,6 @@ class LawyerDetailFragment : Fragment() {
             call.enqueue(object: Callback<LawyerDetailDto> {
                 @SuppressLint("SetTextI18n")
                 override fun onResponse(p0: Call<LawyerDetailDto>, response: Response<LawyerDetailDto>) {
-
                     binding.apply {
                         pbLoading.visibility = View.GONE
 
@@ -86,15 +85,27 @@ class LawyerDetailFragment : Fragment() {
                             R.string.ejemplos_menus,
                             response.body()?.examples?.joinToString(", ")
                         )
-                        // Sección del video
-                        youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener(){
-                                override fun onReady(youTubePlayer: YouTubePlayer) {
-//                                    youTubePlayer.loadVideo("y-wJo11dzPc", 0f)
-                                    youTubePlayer.loadVideo( response.body()?.video.toString()
-                                        , 0f)
-                                }
-                            })
-                        lifecycle.addObserver(youtubePlayerView)
+//                        // Sección del video
+//                        youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener(){
+//                                override fun onReady(youTubePlayer: YouTubePlayer) {
+////                                    youTubePlayer.loadVideo("y-wJo11dzPc", 0f)
+//                                    youTubePlayer.loadVideo( response.body()?.video.toString()
+//                                        , 0f)
+//                                }
+//                            })
+//                        lifecycle.addObserver(youtubePlayerView)
+                        
+                        
+                        btnMaps.setOnClickListener{
+                            requireActivity().supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, MapsFragment.newInstance(
+                                    response.body()?.coordinates?.name.toString(),
+                                    response.body()?.coordinates?.latitude.toString().toDouble(),
+                                    response.body()?.coordinates?.longitud.toString().toDouble()))
+                                .addToBackStack(null)
+                                .commit()
+
+                        }
 
                         //Para justificar el texto de un textview
                         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) //Q corresponde a Android 10
@@ -104,6 +115,7 @@ class LawyerDetailFragment : Fragment() {
 
 
                 }
+
 
                 override fun onFailure(p0: Call<LawyerDetailDto>, p1: Throwable) {
                     //Manejo del error de conexión

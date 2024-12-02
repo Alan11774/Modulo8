@@ -72,4 +72,9 @@
     <string name="forget_password">Forget password?</string>
     <string name="sign_in">Sign In</string>
     <string name="don_t_have_an_account_sign_up">Don’t have an account? Sign up</string>
+    <string name="permission_required">Permission required</string>
+    <string name="is_needed_user_permission_for_location_access">Is needed User permission for location access</string>
+    <string name="ok">Ok</string>
+    <string name="close">Close</string>
+    <string name="the_permission_has_been_denied">The permission has been denied</string>
 </resources>
