@@ -70,13 +70,13 @@ class SignInActivity : AppCompatActivity() {
                 binding.progressBar.visibility = View.VISIBLE
                 firebaseAuth.createUserWithEmailAndPassword(email,contrasenia).addOnCompleteListener { authResult ->
                     if(authResult.isSuccessful){
-                        message("Registro de Usuario exitoso")
+                        message(getString(R.string.user_succesfully_registred))
 
                         //Correo de verificación
                         firebaseAuth.currentUser?.sendEmailVerification()?.addOnSuccessListener{
-                            message("Se ha enviado un correo de verificación a $email")
+                            message("${getString(R.string.email_has_been_sent_to)}$email")
                         }?.addOnFailureListener{
-                            message("Error al enviar el correo de verificación")
+                            message(getString(R.string.error_has_been_occurred_sending_the_mail))
                         }
                         actionLoginSuccessful()
                     }else{
@@ -94,23 +94,23 @@ class SignInActivity : AppCompatActivity() {
                 resetMail.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 
                 AlertDialog.Builder(this)
-                    .setTitle("Restablecer contraseña")
-                    .setMessage("Ingrese su correo electrónico para recibir el enlace de restablecimiento")
+                    .setTitle(getString(R.string.reset_password))
+                    .setMessage(getString(R.string.enter_your_email_to_receive_reset_link))
                     .setView(resetMail)
-                    .setPositiveButton("Enviar"){ _, _ ->
+                    .setPositiveButton(getString(R.string.send)){ _, _ ->
                         val mail = resetMail.text.toString()
                         if(mail.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(mail).matches()){
                             //Mandamos el enlace de restablecimiento
                             firebaseAuth.sendPasswordResetEmail(mail).addOnSuccessListener {
-                                message("El correo para restablecer la contraseña ha sido enviado")
+                                message(getString(R.string.the_email_has_been_sent_to_reset_your_password))
                             }.addOnFailureListener {
-                                message("El enlace no se ha podido enviar")
+                                message(getString(R.string.the_link_to_reset_the_password_has_not_been_sent))
                             }
                         }else{
-                            message("Favor de ingresar una dirección de correo válida")
+                            message(getString(R.string.please_enter_a_valid_email_address))
                         }
                     }
-                    .setNegativeButton("Cancelar"){ dialog, _ ->
+                    .setNegativeButton(getString(R.string.cancel)){ dialog, _ ->
                         dialog.dismiss()
                     }
                     .create()
@@ -123,22 +123,23 @@ class SignInActivity : AppCompatActivity() {
 
             //Verifica que el campo de correo no esté vacío
             if(email.isEmpty()){
-                binding.emailEditText.error = "Se requiere el correo"
+                binding.emailEditText.error = getString(R.string.mail_is_needed)
                 binding.emailEditText.requestFocus()
                 return false
             }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                binding.emailEditText.error = "El correo no tiene un formato válido"
+                binding.emailEditText.error = getString(R.string.mail_has_not_the_correct_format)
                 binding.emailEditText.requestFocus()
                 return false
             }
 
             //Verifica que el campo de la contraseña no esté vacía y tenga al menos 6 caracteres
             if(contrasenia.isEmpty()){
-                binding.passwordEditText.error = "Se requiere una contraseña"
+                binding.passwordEditText.error = getString(R.string.password_is_needed)
                 binding.passwordEditText.requestFocus()
                 return false
             }else if(contrasenia.length < 6){
-                binding.passwordEditText.error = "La contraseña debe tener al menos 6 caracteres"
+                binding.passwordEditText.error =
+                    getString(R.string.password_needs_at_least_6_characters)
                 binding.passwordEditText.requestFocus()
                 return false
             }
@@ -155,43 +156,51 @@ class SignInActivity : AppCompatActivity() {
             }
 
             when(errorCode){
-                "ERROR_INVALID_EMAIL" -> {
-                    Toast.makeText(this, "Error: El correo electrónico no tiene un formato correcto", Toast.LENGTH_SHORT).show()
-                    binding.emailEditText.error = "Error: El correo electrónico no tiene un formato correcto"
+                getString(R.string.error_invalid_email) -> {
+                    Toast.makeText(this,
+                        getString(R.string.error_mail_has_not_the_correct_format), Toast.LENGTH_SHORT).show()
+                    binding.emailEditText.error = getString(R.string.error_mail_has_not_the_correct_format)
                     binding.emailEditText.requestFocus()
                 }
-                "ERROR_WRONG_PASSWORD" -> {
-                    Toast.makeText(this, "Error: La contraseña no es válida", Toast.LENGTH_SHORT).show()
-                    binding.passwordEditText.error = "La contraseña no es válida"
+                getString(R.string.error_wrong_password) -> {
+                    Toast.makeText(this,
+                        getString(R.string.error_password_has_not_the_correct_format), Toast.LENGTH_SHORT).show()
+                    binding.passwordEditText.error = getString(R.string.error_password_has_not_the_correct_format)
                     binding.passwordEditText.requestFocus()
                     binding.passwordEditText.setText("")
 
                 }
-                "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL" -> {
+                getString(R.string.error_account_exists_with_different_credential) -> {
                     //An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.
-                    Toast.makeText(this, "Error: Una cuenta ya existe con el mismo correo, pero con diferentes datos de ingreso", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        getString(R.string.error_an_account_already_exists_with_the_same_email_address_but_different_sign_in_credentials), Toast.LENGTH_SHORT).show()
                 }
-                "ERROR_EMAIL_ALREADY_IN_USE" -> {
-                    Toast.makeText(this, "Error: el correo electrónico ya está en uso con otra cuenta.", Toast.LENGTH_LONG).show()
-                    binding.emailEditText.error = ("Error: el correo electrónico ya está en uso con otra cuenta.")
+                getString(R.string.error_email_already_in_use) -> {
+                    Toast.makeText(this,
+                        getString(R.string.error_the_email_address_is_already_in_use_by_another_account), Toast.LENGTH_LONG).show()
+                    binding.emailEditText.error = getString(R.string.error_the_email_address_is_already_in_use_by_another_account)
                     binding.emailEditText.requestFocus()
                 }
-                "ERROR_USER_TOKEN_EXPIRED" -> {
-                    Toast.makeText(this, "Error: La sesión ha expirado. Favor de ingresar nuevamente.", Toast.LENGTH_LONG).show()
+                getString(R.string.error_user_token_expired) -> {
+                    Toast.makeText(this,
+                        getString(R.string.error_the_session_has_expired_please_log_in_again), Toast.LENGTH_LONG).show()
                 }
-                "ERROR_USER_NOT_FOUND" -> {
-                    Toast.makeText(this, "Error: No existe el usuario con la información proporcionada.", Toast.LENGTH_LONG).show()
+                getString(R.string.error_user_not_found) -> {
+                    Toast.makeText(this,
+                        getString(R.string.error_the_user_does_not_exist), Toast.LENGTH_LONG).show()
                 }
-                "ERROR_WEAK_PASSWORD" -> {
-                    Toast.makeText(this, "La contraseña porporcionada es inválida", Toast.LENGTH_LONG).show()
-                    binding.passwordEditText.error = "La contraseña debe de tener por lo menos 6 caracteres"
+                getString(R.string.error_weak_password) -> {
+                    Toast.makeText(this, getString(R.string.invalid_password), Toast.LENGTH_LONG).show()
+                    binding.passwordEditText.error = getString(R.string.password_needs_at_least_6_characters)
                     binding.passwordEditText.requestFocus()
                 }
-                "NO_NETWORK" -> {
-                    Toast.makeText(this, "Red no disponible o se interrumpió la conexión", Toast.LENGTH_LONG).show()
+                getString(R.string.no_network) -> {
+                    Toast.makeText(this,
+                        getString(R.string.no_network_connection), Toast.LENGTH_LONG).show()
                 }
                 else -> {
-                    Toast.makeText(this, "Error. No se pudo autenticar exitosamente.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        getString(R.string.error_authentication_failed_please_check), Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -210,7 +219,7 @@ class SignInActivity : AppCompatActivity() {
             firebaseAuth.signInWithEmailAndPassword(usr , pwd).addOnCompleteListener{ authResult ->
                 // Se verifica el resultado de la autenticación
                 if(authResult.isSuccessful){
-                    message("Autenticación exitosa")
+                    message(getString(R.string.authentication_successful))
                     actionLoginSuccessful()
                 }else{
                     binding.progressBar.visibility = View.GONE
