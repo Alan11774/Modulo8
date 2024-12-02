@@ -30,9 +30,9 @@ import mx.com.yourlawyer.practica2.data.LawyerRepository
 import mx.com.yourlawyer.practica2.databinding.FragmentMapsBinding
 import mx.com.yourlawyer.practica2.utils.Constants
 
-private const val name:String = ""
-private const val latitude:Double = 0.0
-private const val longitud:Double = 0.0
+private var name:String = ""
+private var latitude:String = ""
+private var longitude:String = ""
 
 class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback, LocationListener {
 
@@ -103,10 +103,6 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback, Locat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        arguments?.let { args ->
-//            name = args.getString(LAWYER_ID)
-//            Log.d(Constants.LOGTAG, getString(R.string.id_recibido, lawyerId))
-//        }
     }
 
     @SuppressLint("MissingPermission")
@@ -150,10 +146,14 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback, Locat
     }
 
     private fun createMarker() {
-        val coordinates = LatLng(19.322326, -99.184592)
+        name = requireArguments().getString("NAME").toString()
+        latitude = requireArguments().getString("LATITUDE").toString()
+        longitude = requireArguments().getString("LONGITUDE").toString()
+//        val coordinates = LatLng(19.322326, -99.184592)
+        val coordinates = LatLng(latitude.toDouble(), longitude.toDouble())
         val marker = MarkerOptions()
             .position(coordinates)
-            .title("DGTIC UNAM")
+            .title(name)
             .snippet("Cursos Y Diplomados en TIC")
             .icon(BitmapDescriptorFactory.fromResource(R.drawable.school))
         map.addMarker(marker)
@@ -181,12 +181,12 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback, Locat
 
     companion object {
         @JvmStatic
-        fun newInstance(api_name: String, api_latitude: Double, api_longitud: Double) =
+        fun newInstance(api_name: String, api_latitude: String, api_longitude: String) =
             MapsFragment().apply {
                 arguments = Bundle().apply {
-                    putString(name, api_name)
-                    putDouble(latitude.toString(), api_latitude)
-                    putDouble(longitud.toString(), api_longitud)
+                    putString("NAME", api_name)
+                    putString("LATITUDE", api_latitude)
+                    putString("LONGITUDE", api_longitude)
                 }
             }
     }
