@@ -24,5 +24,17 @@ data class LawyerDetailDto (
     @SerializedName("video")
     var video: String? = null,
 
+    @SerializedName("coordinates")
+    var coordinates: CoordinatesDto? = null,
 
+
+)
+
+data class CoordinatesDto(
+    @SerializedName("name")
+    var name: String? = null,
+    @SerializedName("latitude")
+    var latitude: String? = null,
+    @SerializedName("longitud")
+    var longitud: String? = null
 )

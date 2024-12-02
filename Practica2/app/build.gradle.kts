@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -15,6 +17,16 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if(localPropertiesFile.exists()){
+            localProperties.load(localPropertiesFile.inputStream())
+        }
+
+        val mapsApiKey = localProperties.getProperty("MAPS_API_KEY")
+
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
+        println(mapsApiKey)
     }
 
     buildTypes {
@@ -70,4 +82,7 @@ dependencies {
 
     //Video Api
     implementation(libs.core)
+
+    //Google Maps
+    implementation(libs.play.services.maps)
 }
