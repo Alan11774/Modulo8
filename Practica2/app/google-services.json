@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "463081346615",
+    "project_id": "idiplodm-5e7a5",
+    "storage_bucket": "idiplodm-5e7a5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463081346615:android:37e3891450027ba57911b2",
+        "android_client_info": {
+          "package_name": "mx.com.yourlawyer.idiplodm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_yALEHYd2-zw_uEVGsXu8qV_NbhjMtko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463081346615:android:b9e23388d4fb78857911b2",
+        "android_client_info": {
+          "package_name": "mx.com.yourlawyer.practica2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_yALEHYd2-zw_uEVGsXu8qV_NbhjMtko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -77,4 +77,5 @@
     <string name="ok">Ok</string>
     <string name="close">Close</string>
     <string name="the_permission_has_been_denied">The permission has been denied</string>
+    <string name="Locations">Locations</string>
 </resources>
