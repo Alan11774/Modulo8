@@ -1,21 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.LawyersListFragment">
-    <Button
-        android:id="@+id/signInButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_in"
-        android:backgroundTint="@color/blue"
-        android:textColor="@color/white"
-        android:layout_marginBottom="16dp"/>
+
     <ImageView
         android:id="@+id/background_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
+
     <ProgressBar
         android:id="@+id/pbLoading"
         android:layout_width="100dp"
@@ -26,7 +21,18 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLawyers"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/btnSignOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_margin="16dp"
+        android:backgroundTint="#FE0303"
+        android:text="@string/sign_out"
+        android:textColor="@color/white" />
 
 </FrameLayout>

@@ -110,4 +110,5 @@
     <string name="no_network_connection">No network connection</string>
     <string name="error_authentication_failed_please_check">Error: Authentication failed,Please check your credentials</string>
     <string name="authentication_successful">Authentication successful</string>
+    <string name="sign_out">sign_out</string>
 </resources>
