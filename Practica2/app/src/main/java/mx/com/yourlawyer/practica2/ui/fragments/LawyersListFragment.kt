@@ -1,5 +1,6 @@
 package mx.com.yourlawyer.practica2.ui.fragments
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,11 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.Target
+import com.google.firebase.auth.FirebaseAuth
 import mx.com.yourlawyer.practica2.R
 import mx.com.yourlawyer.practica2.application.LawyersRfApp
 import mx.com.yourlawyer.practica2.data.LawyerRepository
 import mx.com.yourlawyer.practica2.data.remote.model.LawyerDto
 import mx.com.yourlawyer.practica2.databinding.FragmentLawyersListBinding
+import mx.com.yourlawyer.practica2.ui.SignInActivity
 import mx.com.yourlawyer.practica2.ui.adapters.LawyersAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,9 +33,11 @@ class LawyersListFragment : Fragment() {
     private lateinit var mediaPlayer: MediaPlayer
     private var playing = false
     private var currentPosition = 0
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        firebaseAuth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(
@@ -101,13 +106,21 @@ class LawyersListFragment : Fragment() {
                 binding.pbLoading.visibility = View.GONE
             }
         })
+        binding.btnSignOut.setOnClickListener {
+            firebaseAuth.signOut()
+            parentFragmentManager.beginTransaction()
+                .remove(this)
+                .commit()
+
+        }
     }
 
     override fun onPause() {
         super.onPause()
         playing = mediaPlayer.isPlaying
         currentPosition = mediaPlayer.currentPosition
-        mediaPlayer.pause()
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause()}
     }
 
     override fun onResume() {
@@ -121,6 +134,8 @@ class LawyersListFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-        mediaPlayer.release()
+        if (::mediaPlayer.isInitialized) {
+            mediaPlayer.release()
+        }
     }
 }
